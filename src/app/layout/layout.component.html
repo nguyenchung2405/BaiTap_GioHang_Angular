@@ -1,0 +1,71 @@
+<div class="container">
+    <h1 class="display-4 text-center">Mua Hàng Online</h1>
+    <div class="row mt-4">
+        <div class="col-4" *ngFor='let dienthoai of smartPhones'>
+            <div class="card p-2">
+                <img style="height:280px;" [src]="dienthoai.image" class="w-100" alt="">
+                <p>
+                    {{dienthoai.description}}
+                </p>
+                <button class="btn btn-success" (click)='onAddCart(dienthoai)'>Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-5">
+            <span class="bg-warning text-white px-3 py-2">Thêm Hàng Thành Công</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h1 class="display-4">Giỏ Hàng</h1>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Hình Ảnh</th>
+                        <th>Sản Phẩm</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Cộng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let product of selectedPhones'>
+                        <td>
+                            <img style="width:200px;" [src]="product.Product.image" />
+                        </td>
+                        <td style="font-size:25px;">{{product.Product.name}}</td>
+                        <td>{{product.Product.price}}</td>
+                        <td>
+                            {{product.quantity}}
+                            <div class="btn-group">
+                                <button class="btn btn-info border-right"
+                                    (click)='onIncreaseDecrease(product.Product.id, -1)'>-</button>
+                                <button class="btn btn-info border-left"
+                                    (click)='onIncreaseDecrease(product.Product.id, 1)'>+</button>
+                            </div>
+                        </td>
+                        <td>{{product.Product.price * product.quantity}}</td>
+                        <td>
+                            <button class="btn btn-info" (click)='onDeleteProduct(product.Product.id)'>x</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-size:30px" class="font-weight-bold">Tổng Tiền</td>
+                        <td style="font-size:30px" class="font-weight-bold">{{tongTien()}}</td>
+                        <td>
+                            <button style="font-size:30px" class="btn btn-info" (click)='onThanhToan()'>Thanh
+                                Toán</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
